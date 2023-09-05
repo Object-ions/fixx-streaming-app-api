@@ -2,6 +2,17 @@
   currentPage: window.location.pathname
 };
 
+// Highlight activr link
+function highlightActiveLink() {
+  const links = document.querySelectorAll('.nav-link');
+  
+  links.forEach((link) => {
+    if (link.getAttribute('href') === global.currentPage) {
+      link.classList.add('active');
+    }
+  });
+}
+
 // Init app
 function init() {
   switch (global.currentPage) {
@@ -22,6 +33,7 @@ function init() {
       console.log('search');
       break;
   }
+  highlightActiveLink();
 }
 
 document.addEventListener('DOMContentLoaded', init);
