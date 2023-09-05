@@ -3,14 +3,44 @@
 };
 
 async function displayPopularMovies() {
-  const result = await fetchAPIData('movie/popular');
+  const {results} = await fetchAPIData('movie/popular');
 
-  console.log(result);
+  results.forEach((movie) => {
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
+          <a href="movie-details.html?id=${movie.id}">
+            ${
+              movie.poster_path ?
+              `<img
+              src="http://image.tmdb.org/t/p/w500/${movie.poster_path}"
+              class="card-img-top"
+              alt="${movie.title}"
+            />` : 
+            `<img
+              src="../images/no-image.jpg"
+              class="card-img-top"
+              alt="${movie.title}"
+            />`
+            }
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">${movie.title}</h5>
+            <p class="card-text">
+              <small class="text-muted">Release: ${movie.release_date}</small>
+            </p>
+          </div>
+    `;
+
+    document.querySelector('#popular-movies').appendChild(div);
+  });
+
+  console.log(results);
 }
 
 // Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
-  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const API_KEY = '114b9af45a49b654552c1f26211f3db5';
   const API_URL = `https://api.themoviedb.org/3/`;
 
   const response = await fetch(`${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`);
