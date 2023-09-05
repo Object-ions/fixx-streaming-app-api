@@ -34,8 +34,18 @@ async function displayPopularMovies() {
 
     document.querySelector('#popular-movies').appendChild(div);
   });
+}
 
-  console.log(results);
+// Show spinner
+function showSpinner() {
+  const spinner = document.querySelector('.spinner');
+  spinner.classList.add('show');
+}
+
+// Hide spinner
+function hideSpinner() {
+  const spinner = document.querySelector('.spinner');
+  spinner.classList.remove('show');
 }
 
 // Fetch data from TMDB API
@@ -43,14 +53,18 @@ async function fetchAPIData(endpoint) {
   const API_KEY = '114b9af45a49b654552c1f26211f3db5';
   const API_URL = `https://api.themoviedb.org/3/`;
 
+  showSpinner();
+
   const response = await fetch(`${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`);
 
   const data = await response.json();
 
+  hideSpinner();
+
   return data;
 }
 
-// Highlight activr link
+// Highlight active link
 function highlightActiveLink() {
   const links = document.querySelectorAll('.nav-link');
   
