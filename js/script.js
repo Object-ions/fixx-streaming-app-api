@@ -9,6 +9,8 @@ function highlightActiveLink() {
   links.forEach((link) => {
     if (link.getAttribute('href') === global.currentPage) {
       link.classList.add('active');
+    } else if (global.currentPage == '/index.html') {
+      document.querySelector('.nav-link').classList.add('active');
     }
   });
 }
