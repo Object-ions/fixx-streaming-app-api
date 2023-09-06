@@ -6,6 +6,10 @@
     page: 1,
     totalPages: 1,
   },
+  api: {
+    apiKey: '114b9af45a49b654552c1f26211f3db5',
+    apiUrl : 'https://api.themoviedb.org/3/',
+  }
 };
 
 // Display popular movies
@@ -244,7 +248,8 @@ async function search() {
   global.search.term = urlParams.get('search-term');
 
   if (global.search.term !== '' && global.search.term !== null) {
-    // @todo- make request ansd search result
+    const results = await searchAPIData();
+    console.log(results);
   } else {
     showAlert('Please enter a search term');
   }
@@ -301,8 +306,8 @@ function initSwiper() {
 
 // Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
-  const API_KEY = '114b9af45a49b654552c1f26211f3db5';
-  const API_URL = `https://api.themoviedb.org/3/`;
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiUrl;
 
   showSpinner();
 
