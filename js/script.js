@@ -246,7 +246,7 @@ async function search() {
   if (global.search.term !== '' && global.search.term !== null) {
     // @todo- make request ansd search result
   } else {
-    alert('Please enter a seach term');
+    showAlert('Please enter a search term');
   }
 }
 
@@ -331,6 +331,16 @@ function highlightActiveLink() {
 // Format money with commas
 function addCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+// Show alert
+function showAlert(message, className) {
+  const alertEl = document.createElement('div');
+  alertEl.classList.add('alert', className);
+  alertEl.appendChild(document.createTextNode(message));
+  document.querySelector('#alert').appendChild(alertEl);
+
+  setTimeout(() => alertEl.remove(), 3000);
 }
 
 // Init app
