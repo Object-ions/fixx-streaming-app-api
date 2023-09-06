@@ -138,7 +138,7 @@ ul {
 .card:hover {
   transform: scale(1.05);
   transition: all 0.5s ease-in-out;
-  background: #0a4b8f;
+  /* background: #0a4b8f; */
 }
 
 /* Footer */
