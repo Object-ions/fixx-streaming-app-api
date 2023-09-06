@@ -320,6 +320,22 @@ async function fetchAPIData(endpoint) {
   return data;
 }
 
+// Search data from TMDB API using search form
+async function searchAPIData() {
+  const API_KEY = global.api.apiKey;
+  const API_URL = global.api.apiUrl;
+
+  showSpinner();
+
+  const response = await fetch(`${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.term}`);
+
+  const data = await response.json();
+
+  hideSpinner();
+
+  return data;
+}
+
 // Highlight active link
 function highlightActiveLink() {
   const links = document.querySelectorAll('.nav-link');
