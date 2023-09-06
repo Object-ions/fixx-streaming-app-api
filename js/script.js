@@ -1,5 +1,11 @@
  const global = {
-  currentPage: window.location.pathname
+  currentPage: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    page: 1,
+    totalPages: 1,
+  },
 };
 
 // Display popular movies
@@ -71,7 +77,6 @@ async function displayPopularShows() {
     document.querySelector('#popular-shows').appendChild(div);
   });
 }
-
 
 // Show spinner
 function showSpinner() {
@@ -230,6 +235,21 @@ function displayBGImage(type, backgroundPath) {
   }
 }
 
+// Search movies / shows
+async function search() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  global.search.type = urlParams.get('type');
+  global.search.term = urlParams.get('search-term');
+
+  if (global.search.term !== '' && global.search.term !== null) {
+    // @todo- make request ansd search result
+  } else {
+    alert('Please enter a seach term');
+  }
+}
+
 // Display slider movies
 async function displaySlider() {
   const { results } = await fetchAPIData('movie/now_playing');
@@ -331,7 +351,7 @@ function init() {
       displayShowDetails('tv-details');
       break;
     case '/search.html':
-      console.log('search');
+      search();
       break;
   }
   highlightActiveLink();
